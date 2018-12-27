@@ -11,7 +11,6 @@ services:
       - ./api:/api
     depends_on:
       - db
-      - migrations
       - migrate
     command: python manage.py runserver 0.0.0.0:8000
 
@@ -20,15 +19,6 @@ services:
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-
-  migrations:
-    image: todo_api
-    restart: always
-    volumes:
-      - ./api:/api
-    depends_on:
-      - db
-    command: python manage.py makemigrations
 
   migrate:
     image: todo_api
