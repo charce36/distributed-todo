@@ -4,6 +4,7 @@ services:
   api:
     build: ./api/
     image: todo_api
+    restart: always
     ports:
       - "8000:8000"
     volumes:
@@ -16,11 +17,13 @@ services:
 
   db:
     image: postgres:11.1-alpine
+    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
   migrations:
     image: todo_api
+    restart: always
     volumes:
       - ./api:/api
     depends_on:
@@ -29,6 +32,7 @@ services:
 
   migrate:
     image: todo_api
+    restart: always
     volumes:
       - ./api:/api
     depends_on:
