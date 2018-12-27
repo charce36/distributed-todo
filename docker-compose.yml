@@ -19,5 +19,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
+  front:
+    build: ./front/
+    image: todo_front
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/front
+    depends_on:
+      - api
+    command: npm start
+
 volumes:
   postgres_data:
