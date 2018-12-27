@@ -26,7 +26,6 @@ services:
     volumes:
       - ./api:/api
     depends_on:
-      - migrations
       - db
     command: python manage.py migrate --noinput
 
