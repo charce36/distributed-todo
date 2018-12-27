@@ -3,8 +3,38 @@ version: "2.0"
 services:
   api:
     build: ./api/
+    image: todo_api
     ports:
       - "8000:8000"
     volumes:
       - ./api:/api
+    depends_on:
+      - db
+      - migrations
+      - migrate
     command: python manage.py runserver 0.0.0.0:8000
+
+  db:
+    image: postgres:11.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  migrations:
+    image: todo_api
+    volumes:
+      - ./api:/api
+    depends_on:
+      - db
+    command: python manage.py makemigrations
+
+  migrate:
+    image: todo_api
+    volumes:
+      - ./api:/api
+    depends_on:
+      - migrations
+      - db
+    command: python manage.py migrate --noinput
+
+volumes:
+  postgres_data:

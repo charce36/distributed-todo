@@ -1,10 +1,12 @@
-FROM python:3.5.2
+FROM python:3.5-alpine
 ENV PYTHONUNBUFFERED 1
 
 # Create API directory
 RUN mkdir /api
 WORKDIR /api
 
+# Install dependencies
+RUN apk update && apk add postgresql-dev gcc musl-dev
 # Add requirements.txt file to container
 ADD requirements.txt /api/
 
