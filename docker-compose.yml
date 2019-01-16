@@ -27,6 +27,7 @@ services:
       - "3000:3000"
     volumes:
       - ./front:/front
+      - '/front/node_modules'
     depends_on:
       - api
     command: npm start

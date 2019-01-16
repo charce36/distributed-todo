@@ -1,15 +1,11 @@
 FROM node:10.15-alpine
-# Create API directory
-RUN mkdir /front
+
+# Create app directory
+RUN mkdir -p /front
 WORKDIR /front
 
-ADD package.json /front/package.json
+COPY package.json /front/
 
-ENV NODE_PATH /node_modules
-ENV PATH /node_modules/.bin:$PATH
-
-RUN npm install --silent
+RUN npm install
 RUN npm install react-scripts@1.1.1 -g --silent
-
-# Add the current directory to Docker container
 ADD . /front
