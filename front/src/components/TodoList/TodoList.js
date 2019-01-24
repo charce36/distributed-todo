@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import TodoItem from '../TodoItem';
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,7 @@ class TodoList extends Component {
     return (
       <div className="TodoList">
         {this.state.todos.map(todo => {
-          return <div key={todo.id}>{todo.title}</div>
+          return <TodoItem key={todo.id} title={todo.title}/>
         })}
       </div>
     );
